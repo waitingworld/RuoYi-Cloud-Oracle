@@ -1,4 +1,3 @@
-<!--
 <template>
   <div class="login">
     <el-form ref="loginForm" :model="loginForm" :rules="loginRules" class="login-form">
@@ -55,7 +54,7 @@
         </div>
       </el-form-item>
     </el-form>
-    &lt;!&ndash;  底部  &ndash;&gt;
+    <!--  底部  -->
     <div class="el-login-footer">
       <span>Copyright © 2018-2023 ruoyi.vip All Rights Reserved.</span>
     </div>
@@ -218,20 +217,3 @@ export default {
   height: 38px;
 }
 </style>
--->
-<template>
-  <bpmn-view :xml="xml" />
-</template>
-<script>
-import xml from "@/components/bpmn/xml";
-import BpmnView from "@/components/bpmn/bpmnView.vue";
-
-export default {
-  components: {BpmnView},
-  computed: {
-    xml() {
-      return xml
-    }
-  }
-};
-</script>

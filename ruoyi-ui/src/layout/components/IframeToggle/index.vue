@@ -1,24 +1,19 @@
 <template>
   <transition-group name="fade-transform" mode="out-in">
     <inner-link
-      v-for="(item, index) in iframeViews"
+      v-for="(item, index) in tagsViewStore.iframeViews"
       :key="item.path"
       :iframeId="'iframe' + index"
-      v-show="$route.path === item.path"
+      v-show="route.path === item.path"
       :src="item.meta.link"
     ></inner-link>
   </transition-group>
 </template>
 
-<script>
+<script setup>
 import InnerLink from "../InnerLink/index"
+import useTagsViewStore from '@/store/modules/tagsView'
 
-export default {
-  components: { InnerLink },
-  computed: {
-    iframeViews() {
-      return this.$store.state.tagsView.iframeViews
-    }
-  }
-}
+const route = useRoute();
+const tagsViewStore = useTagsViewStore()
 </script>

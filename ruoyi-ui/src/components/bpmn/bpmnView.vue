@@ -42,11 +42,11 @@ export default {
   methods: {
     initBpmn(bpmnViewContainer) {
       return new Promise(resolve => {
-          const bpmnViewer = new BpmnViewer({
-            container: bpmnViewContainer,
-          })
-          resolve(bpmnViewer)
-        }
+            const bpmnViewer = new BpmnViewer({
+              container: bpmnViewContainer,
+            })
+            resolve(bpmnViewer)
+          }
       );
     },
     async loadBpmn(bpmnViewer, xml) {
@@ -54,9 +54,9 @@ export default {
       try {
         const result = await bpmnViewer.importXML(xml);
         const {warnings} = result;
-        console.log(warnings);
+        console.log('bpmnView', warnings);
       } catch (err) {
-        console.log(err.message, err.warnings);
+        console.log('bpmnView', err.message, err.warnings);
       }
     },
   }

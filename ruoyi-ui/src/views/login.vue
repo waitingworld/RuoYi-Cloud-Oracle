@@ -1,4 +1,4 @@
-<template>
+<!--<template>
   <div class="login">
     <el-form ref="loginRef" :model="loginForm" :rules="loginRules" class="login-form">
       <h3 class="title">若依后台管理系统</h3>
@@ -57,7 +57,7 @@
         </div>
       </el-form-item>
     </el-form>
-    <!--  底部  -->
+    &lt;!&ndash;  底部  &ndash;&gt;
     <div class="el-login-footer">
       <span>Copyright © 2018-2023 ruoyi.vip All Rights Reserved.</span>
     </div>
@@ -212,10 +212,9 @@ getCookie();
   height: 40px;
   padding-left: 12px;
 }
-</style>
-<!--
+</style>-->
 <template>
-&lt;!&ndash;    <bpmn-view :xml="xml" />&ndash;&gt;
+<!--    <bpmn-view :xml="xml" />-->
   <bpmn-edit :xml="xml"/>
 </template>
 <script>
@@ -232,4 +231,4 @@ export default {
     }
   }
 };
-</script>-->
+</script>

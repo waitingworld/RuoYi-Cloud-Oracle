@@ -1,7 +1,8 @@
 <template>
   <div style="width: 100%;height: 100%;">
     <div ref="bpmnEditContainer" style="width: 100%;height: 100%;"></div>
-    <div ref="bpmnEditPropertiesPanel" style="position: fixed;top: 10vh;right: 5vw;width: 20vw;height: 80vh;background-color: rgba(54,163,247,0.17)"></div>
+    <div ref="bpmnEditPropertiesPanel"
+         style="position: fixed;top: 10vh;right: 5vw;width: 20vw;height: 80vh;background-color: rgba(54,163,247,0.17)"></div>
   </div>
 </template>
 
@@ -13,6 +14,7 @@ import {
   CamundaPlatformPropertiesProviderModule
 } from 'bpmn-js-properties-panel';
 import CamundaBpmnModdle from 'camunda-bpmn-moddle/resources/camunda.json'
+import customTranslateModule from './Translate'
 
 
 export default {
@@ -51,34 +53,41 @@ export default {
   },
   methods: {
     initBpmn(bpmnEditContainer, bpmnEditPropertiesPanel) {
-      debugger
       return new Promise(resolve => {
-          const bpmnModel = new BpmnModel({
-            container: bpmnEditContainer,
-            propertiesPanel: {
-              parent: bpmnEditPropertiesPanel
-            },
-            additionalModules: [
-              BpmnPropertiesPanelModule,
-              BpmnPropertiesProviderModule,
-              CamundaPlatformPropertiesProviderModule
-            ],
-            moddleExtensions: {
-              camunda: CamundaBpmnModdle
-            }
-          })
-          resolve(bpmnModel)
-        }
+            const bpmnModel = new BpmnModel({
+              container: bpmnEditContainer,
+              propertiesPanel: {
+                parent: bpmnEditPropertiesPanel
+              },
+              additionalModules: [
+                BpmnPropertiesPanelModule,
+                BpmnPropertiesProviderModule,
+                CamundaPlatformPropertiesProviderModule,
+                customTranslateModule,
+              ],
+              moddleExtensions: {
+                camunda: CamundaBpmnModdle
+              }
+            })
+            resolve(bpmnModel)
+          }
       );
     },
     async loadBpmn(bpmnModel, xml) {
       // 加载BPMN文件
       try {
-        const result = await bpmnModel.importXML(xml);
-        const {warnings} = result;
-        console.log(warnings);
+        if (xml) {
+          const result = await bpmnModel.importXML(xml);
+          const {warnings} = result;
+          console.log('bpmnEdit warnings', warnings);
+        } else {
+          const result = bpmnModel.createDiagram(() => {
+          });
+          const {warnings} = result;
+          console.log('bpmnEdit warnings', warnings);
+        }
       } catch (err) {
-        console.log(err.message, err.warnings);
+        console.log('bpmnEdit err', err.message, err.warnings);
       }
     },
   }

@@ -3,6 +3,9 @@
     <div ref="bpmnEditContainer" style="width: 100%;height: 100%;"></div>
     <div ref="bpmnEditPropertiesPanel"
          style="position: fixed;top: 10vh;right: 5vw;width: 20vw;height: 80vh;background-color: rgba(54,163,247,0.17)"></div>
+    <div style="position: fixed;top: 1vh;left: 3vw;">
+      <el-button size="small" type="primary" @click="saveXml">保存xml</el-button>
+    </div>
   </div>
 </template>
 
@@ -78,6 +81,8 @@ export default {
       try {
         if (xml) {
           const result = await bpmnModel.importXML(xml);
+          debugger
+          bpmnModel.get("canvas").zoom('fit-viewport')
           const {warnings} = result;
           console.log('bpmnEdit warnings', warnings);
         } else {
@@ -90,6 +95,15 @@ export default {
         console.log('bpmnEdit err', err.message, err.warnings);
       }
     },
+    async saveXml() {
+      try {
+        const result = await this.bpmnModel.saveXML({format: true});
+        const {xml} = result;
+        console.log(xml);
+      } catch (err) {
+        console.log(err);
+      }
+    }
   }
 }
 </script>

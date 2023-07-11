@@ -1,5 +1,5 @@
 <template>
-  <div ref="bpmnViewContainer" style="width: 100%;height: 100%;"/>
+  <div ref="bpmnViewContainer" class="viewContainerClass"/>
 </template>
 
 <script>
@@ -63,6 +63,9 @@ export default {
 }
 </script>
 
-<style scoped>
-
+<style scoped lang="scss">
+.viewContainerClass {
+  width: 100%;
+  height: 100%;
+}
 </style>

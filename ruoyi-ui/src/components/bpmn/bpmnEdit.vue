@@ -1,10 +1,13 @@
 <template>
-  <div style="width: 100%;height: 100%;">
-    <div ref="bpmnEditContainer" style="width: 100%;height: 100%;"></div>
-    <div ref="bpmnEditPropertiesPanel"
-         style="position: fixed;top: 10vh;right: 5vw;width: 20vw;height: 80vh;background-color: rgba(54,163,247,0.17)"></div>
-    <div style="position: fixed;top: 1vh;left: 3vw;">
-      <el-button size="small" type="primary" @click="saveXml">保存xml</el-button>
+  <div class="bpmnEditClass">
+    <div ref="bpmnEditContainer" class="containerClass"></div>
+    <div ref="bpmnEditPropertiesPanel" class="panelClass"/>
+    <div class="btnClass">
+      <el-button-group>
+        <el-button type="primary" @click="saveXml">预览</el-button>
+        <el-button type="primary" @click="saveXml">提交</el-button>
+        <el-button type="primary" @click="saveXml">部署</el-button>
+      </el-button-group>
     </div>
   </div>
 </template>
@@ -18,7 +21,6 @@ import {
 } from 'bpmn-js-properties-panel';
 import CamundaBpmnModdle from 'camunda-bpmn-moddle/resources/camunda.json'
 import customTranslateModule from './Translate'
-
 
 export default {
   name: "bpmnEdit",
@@ -81,13 +83,10 @@ export default {
       try {
         if (xml) {
           const result = await bpmnModel.importXML(xml);
-          debugger
-          bpmnModel.get("canvas").zoom('fit-viewport')
           const {warnings} = result;
           console.log('bpmnEdit warnings', warnings);
         } else {
-          const result = bpmnModel.createDiagram(() => {
-          });
+          const result = bpmnModel.createDiagram(() => {});
           const {warnings} = result;
           console.log('bpmnEdit warnings', warnings);
         }
@@ -108,6 +107,29 @@ export default {
 }
 </script>
 
-<style scoped>
+<style scoped lang="scss">
+.bpmnEditClass {
+  width: 100%;
+  height: 100%;
 
+  .containerClass {
+    width: 100%;
+    height: 100%;
+  }
+
+  .panelClass {
+    position: fixed;
+    top: 10vh;
+    right: 5vw;
+    width: 20vw;
+    height: 80vh;
+    background-color: rgba(54, 163, 247, 0.17);
+  }
+
+  .btnClass {
+    position: fixed;
+    top: 1vh;
+    left: 3vw;
+  }
+}
 </style>

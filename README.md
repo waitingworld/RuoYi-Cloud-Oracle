@@ -8,7 +8,7 @@
 	<a href="https://gitee.com/y_project/RuoYi-Cloud"><img src="https://img.shields.io/badge/RuoYi-v3.6.2-brightgreen.svg"></a>
 	<a href="https://gitee.com/y_project/RuoYi-Cloud/blob/master/LICENSE"><img src="https://img.shields.io/github/license/mashape/apistatus.svg"></a>
 </p>
-
+ 
 ## 平台简介
 
 若依是一套全部开源的快速开发平台，毫无保留给个人及企业免费使用。

@@ -58,6 +58,6 @@ com.ruoyi
 
 ## 部署说明
 1. 安装redis
-2. 安装nacos（可以摘environment文件夹下找），导入配置文件（environment文件夹下的naocs文件夹下的压缩包）
+2. 安装nacos（nacos-server-2.2.3.zip），导入配置文件（environment文件夹下的naocs文件夹下的压缩包）
 3. 安装oracle数据库，创建对应的用户（environment文件夹下有对应的sql）
 4. 运行sql脚本，如果需要activiti，也要运行对应的脚本

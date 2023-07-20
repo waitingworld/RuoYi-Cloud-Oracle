@@ -22,7 +22,7 @@ export default {
     'Create expanded SubProcess': '创建扩展子过程',
     'Create IntermediateThrowEvent/BoundaryEvent': '创建中间抛出事件/边界事件',
     'Create Pool/Participant': '创建池/参与者',
-    'Multi-instance':'多重事件',
+    'Multi-instance': '多重事件',
     'Parallel Multi Instance': '并行多重事件',
     'Sequential Multi Instance': '时序多重事件',
     'Out mapping propagation': '外部映射传播',

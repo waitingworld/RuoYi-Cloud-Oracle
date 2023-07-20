@@ -1,14 +1,14 @@
 <template>
-  <router-view />
+  <router-view/>
 </template>
 
 <script setup>
 import useSettingsStore from '@/store/modules/settings'
-import { handleThemeStyle } from '@/utils/theme'
+import {handleThemeStyle} from '@/utils/theme'
 
 onMounted(() => {
   nextTick(() => {
-    // 初始化主题样式
+    // 锟斤拷始锟斤拷锟斤拷锟斤拷锟斤拷式
     handleThemeStyle(useSettingsStore().theme)
   })
 })

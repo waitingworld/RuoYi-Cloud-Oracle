@@ -47,49 +47,50 @@ cache["bpmnlint/task-required"] = taskRequired;
  * A resolver that caches rules and configuration as part of the bundle,
  * making them accessible in the browser.
  */
-function Resolver() {}
+function Resolver() {
+}
 
 Resolver.prototype.resolveRule = function (pkg, ruleName) {
-  const rule = cache[pkg + "/" + ruleName];
+    const rule = cache[pkg + "/" + ruleName];
 
-  if (!rule) {
-    throw new Error("cannot resolve rule <" + pkg + "/" + ruleName + ">");
-  }
+    if (!rule) {
+        throw new Error("cannot resolve rule <" + pkg + "/" + ruleName + ">");
+    }
 
-  return rule;
+    return rule;
 };
 
 Resolver.prototype.resolveConfig = function (pkg, configName) {
-  throw new Error("cannot resolve config <" + configName + "> in <" + pkg + ">");
+    throw new Error("cannot resolve config <" + configName + "> in <" + pkg + ">");
 };
 
 export const resolver = new Resolver();
 
 export const rules = {
-  "conditional-flows": "error",
-  "end-event-required": "error",
-  "event-sub-process-typed-start-event": "error",
-  "fake-join": "warn",
-  "label-required": "off",
-  "no-bpmndi": "error",
-  "no-complex-gateway": "error",
-  "no-disconnected": "error",
-  "no-duplicate-sequence-flows": "error",
-  "no-gateway-join-fork": "error",
-  "no-implicit-split": "error",
-  "no-inclusive-gateway": "error",
-  "single-blank-start-event": "error",
-  "single-event-definition": "error",
-  "start-event-required": "error",
-  "sub-process-blank-start-event": "error",
-  "superfluous-gateway": "warning"
+    "conditional-flows": "error",
+    "end-event-required": "error",
+    "event-sub-process-typed-start-event": "error",
+    "fake-join": "warn",
+    "label-required": "off",
+    "no-bpmndi": "error",
+    "no-complex-gateway": "error",
+    "no-disconnected": "error",
+    "no-duplicate-sequence-flows": "error",
+    "no-gateway-join-fork": "error",
+    "no-implicit-split": "error",
+    "no-inclusive-gateway": "error",
+    "single-blank-start-event": "error",
+    "single-event-definition": "error",
+    "start-event-required": "error",
+    "sub-process-blank-start-event": "error",
+    "superfluous-gateway": "warning"
 };
 
 export const config = {
-  rules: rules
+    rules: rules
 };
 
 export default {
-  resolver: resolver,
-  config: config
+    resolver: resolver,
+    config: config
 };

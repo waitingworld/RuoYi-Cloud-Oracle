@@ -34,7 +34,7 @@
         <jjwt.version>0.9.1</jjwt.version>
         <minio.version>8.2.2</minio.version>
         <poi.version>4.1.2</poi.version>
-<!--        <oracle.version>12.2.0.1</oracle.version>-->
+        <!--        <oracle.version>12.2.0.1</oracle.version>-->
         <transmittable-thread-local.version>2.14.2</transmittable-thread-local.version>
     </properties>
 
@@ -101,7 +101,7 @@
                 <artifactId>pagehelper-spring-boot-starter</artifactId>
                 <version>${pagehelper.boot.version}</version>
             </dependency>
-            
+
             <!-- Oracle驱动 -->
             <dependency>
                 <groupId>com.oracle.ojdbc</groupId>
@@ -224,9 +224,21 @@
             <dependency>
                 <groupId>org.activiti</groupId>
                 <artifactId>activiti-spring-boot-starter</artifactId>
-                <version>7.1.0.M6</version>
+<!--                <version>7.1.0.M6</version>-->
+                <version>7.0.0.GA</version>
             </dependency>
 
+            <dependency>
+                <groupId>org.activiti</groupId>
+                <artifactId>activiti-image-generator</artifactId>
+                <version>5.22.0</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.projectlombok</groupId>
+                <artifactId>lombok</artifactId>
+                <version>1.18.28</version>
+            </dependency>
         </dependencies>
     </dependencyManagement>
 

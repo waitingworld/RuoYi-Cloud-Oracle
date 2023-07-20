@@ -5,9 +5,9 @@ import lint from "./lint";
 import other from "./other";
 
 export default {
-  ...other,
-  ...events,
-  ...gateway,
-  ...lint,
-  ...tasks
+    ...other,
+    ...events,
+    ...gateway,
+    ...lint,
+    ...tasks
 };

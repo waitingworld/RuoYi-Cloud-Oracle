@@ -5,7 +5,7 @@
     <div class="btnClass">
       <el-button-group>
         <el-button type="primary" @click="saveXml">预览</el-button>
-        <el-button type="primary" @click="saveXml">提交</el-button>
+        <el-button type="primary" @click="submitBpmnXML">提交</el-button>
         <el-button type="primary" @click="saveXml">部署</el-button>
       </el-button-group>
     </div>
@@ -21,6 +21,7 @@ import {
 } from 'bpmn-js-properties-panel';
 import CamundaBpmnModdle from 'camunda-bpmn-moddle/resources/camunda.json'
 import customTranslateModule from './Translate'
+import {saveProcessXml} from "@/api/activiti/activiti";
 
 export default {
   name: "bpmnEdit",
@@ -86,7 +87,8 @@ export default {
           const {warnings} = result;
           console.log('bpmnEdit warnings', warnings);
         } else {
-          const result = bpmnModel.createDiagram(() => {});
+          const result = bpmnModel.createDiagram(() => {
+          });
           const {warnings} = result;
           console.log('bpmnEdit warnings', warnings);
         }
@@ -99,16 +101,27 @@ export default {
         const result = await this.bpmnModel.saveXML({format: true});
         const {xml} = result;
         console.log(xml);
+        return xml;
       } catch (err) {
         console.log(err);
       }
-    }
+    },
+    async submitBpmnXML() {
+      const xml = await this.saveXml()
+      const params = {
+        processVersion: '',
+        XML: 'xml'
+      }
+      const result = await saveProcessXml(params)
+      debugger
+    },
   }
 }
 </script>
 
 <style scoped lang="scss">
 .bpmnEditClass {
+  position: relative;
   width: 100%;
   height: 100%;
 
@@ -127,7 +140,7 @@ export default {
   }
 
   .btnClass {
-    position: fixed;
+    position: absolute;
     top: 1vh;
     left: 3vw;
   }

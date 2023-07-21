@@ -110,7 +110,7 @@ export default {
       const xml = await this.saveXml()
       const params = {
         processVersion: '',
-        XML: 'xml'
+        XML: xml
       }
       const result = await saveProcessXml(params)
       debugger

@@ -1,17 +1,17 @@
 package com.ruoyi.activiti.controller;
 
-import com.alibaba.fastjson.JSONObject;
 import com.ruoyi.activiti.domain.dto.ActivitiDeploy;
+import com.ruoyi.activiti.security.util.ActivitiSecurityUtil;
 import com.ruoyi.activiti.service.ActivitiService;
 import com.ruoyi.common.core.web.controller.BaseController;
 import com.ruoyi.common.core.web.domain.AjaxResult;
 import com.ruoyi.common.security.annotation.RequiresPermissions;
+import com.ruoyi.common.security.utils.SecurityUtils;
 import org.activiti.api.task.runtime.TaskRuntime;
+import org.activiti.api.task.runtime.conf.TaskRuntimeConfiguration;
 import org.activiti.engine.repository.Deployment;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 
 /**
@@ -26,13 +26,16 @@ public class ActivitiController extends BaseController {
     private ActivitiService activitiService;
     @Autowired
     private TaskRuntime taskRuntime;
+    @Autowired
+    private ActivitiSecurityUtil activitiSecurityUtil;
 
     /**
      * 通过xml部署工作流
      */
-//    @RequiresPermissions("activiti:process:edit")
+    @RequiresPermissions("activiti:process:edit")
     @PostMapping("/deployProcessByXml")
     public AjaxResult deployProcessByXml(ActivitiDeploy activitiDeploy) {
+        activitiSecurityUtil.logInAs(SecurityUtils.getUsername());
         Deployment deployment = activitiService.deployProcessByXml(activitiDeploy);
         return success(deployment);
     }
@@ -40,10 +43,11 @@ public class ActivitiController extends BaseController {
     /**
      * 保存xml
      */
-//    @RequiresPermissions("activiti:process:edit")
+    @RequiresPermissions("activiti:process:edit")
     @PostMapping("/saveProcessXml")
     public AjaxResult saveProcessXml(@RequestBody ActivitiDeploy activitiDeploy) {
-//        boolean res = activitiService.saveProcessXml(activitiDeploy);
-        return success(taskRuntime.task("1"));
+        activitiSecurityUtil.logInAs(SecurityUtils.getUsername());
+        boolean res = activitiService.saveProcessXml(activitiDeploy);
+        return success(res);
     }
 }

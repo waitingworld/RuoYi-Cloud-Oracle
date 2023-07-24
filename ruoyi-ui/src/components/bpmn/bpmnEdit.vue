@@ -6,7 +6,7 @@
       <el-button-group>
         <el-button type="primary" @click="saveXml">预览</el-button>
         <el-button type="primary" @click="submitBpmnXML">提交</el-button>
-        <el-button type="primary" @click="saveXml">部署</el-button>
+        <el-button type="primary" @click="deployBpmnXML">部署</el-button>
       </el-button-group>
     </div>
   </div>
@@ -20,8 +20,9 @@ import {
   CamundaPlatformPropertiesProviderModule
 } from 'bpmn-js-properties-panel';
 import CamundaBpmnModdle from 'camunda-bpmn-moddle/resources/camunda.json'
+// import activitiModdleDescriptor from './additional-modules/moddle-extensions/activiti.json'
 import customTranslateModule from './Translate'
-import {saveProcessXml} from "@/api/activiti/activiti";
+import {deployProcessByXml, saveProcessXml} from "@/api/activiti/activiti";
 
 export default {
   name: "bpmnEdit",
@@ -73,6 +74,7 @@ export default {
               ],
               moddleExtensions: {
                 camunda: CamundaBpmnModdle
+                // activiti: activitiModdleDescriptor
               }
             })
             resolve(bpmnModel)
@@ -96,9 +98,9 @@ export default {
         console.log('bpmnEdit err', err.message, err.warnings);
       }
     },
-    async saveXml() {
+    async saveXml(format = true) {
       try {
-        const result = await this.bpmnModel.saveXML({format: true});
+        const result = await this.bpmnModel.saveXML({format: format});
         const {xml} = result;
         console.log(xml);
         return xml;
@@ -107,13 +109,28 @@ export default {
       }
     },
     async submitBpmnXML() {
-      const xml = await this.saveXml()
+      const xml = await this.saveXml(false)
       const params = {
-        processVersion: '',
-        XML: xml
+        xml: xml
       }
       const result = await saveProcessXml(params)
-      debugger
+      if (result.data) {
+        this.$notify.success(result.msg)
+      } else {
+        this.$notify.error(result.msg)
+      }
+    },
+    async deployBpmnXML() {
+      const xml = await this.saveXml(false)
+      const params = {
+        xml: xml
+      }
+      const result = await deployProcessByXml(params)
+      if (result.data) {
+        this.$notify.success(result.msg)
+      } else {
+        this.$notify.error(result.msg)
+      }
     },
   }
 }

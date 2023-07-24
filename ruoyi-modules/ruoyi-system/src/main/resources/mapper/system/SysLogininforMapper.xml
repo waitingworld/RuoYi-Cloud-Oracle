@@ -10,19 +10,19 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result property="status"        column="status"            />
 		<result property="ipaddr"        column="ipaddr"            />
 		<result property="msg"           column="msg"               />
-		<result property="accessTime"    column="access_time"       />
+		<result property="loginTime"    column="login_time"       />
 	</resultMap>
 
 	<insert id="insertLogininfor" parameterType="SysLogininfor">
 	    <selectKey keyProperty="infoId" resultType="long" order="BEFORE">
 			SELECT seq_sys_logininfor.NEXTVAL as infoId FROM DUAL
 		</selectKey>
-		insert into sys_logininfor (info_id, user_name, status, ipaddr, msg, access_time)
+		insert into sys_logininfor (info_id, user_name, status, ipaddr, msg, login_time)
 		values (#{infoId}, #{userName}, #{status}, #{ipaddr}, #{msg}, sysdate)
 	</insert>
 	
 	<select id="selectLogininforList" parameterType="SysLogininfor" resultMap="SysLogininforResult">
-		select info_id, user_name, ipaddr, status, msg, access_time from sys_logininfor
+		select info_id, user_name, ipaddr, status, msg, login_time from sys_logininfor
 		<where>
 			<if test="ipaddr != null and ipaddr != ''">
 				AND ipaddr like concat(concat('%',#{ipaddr}),'%')
@@ -34,10 +34,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 				AND user_name like concat(concat('%',#{userName}),'%')
 			</if>
 			<if test="params.beginTime != null and params.beginTime != ''"><!-- 开始时间检索 -->
-				AND access_time &gt;= to_date(#{params.beginTime}, 'yyyy-mm-dd hh24:mi:ss')
+				AND login_time &gt;= to_date(#{params.beginTime}, 'yyyy-mm-dd hh24:mi:ss')
 			</if>
 			<if test="params.endTime != null and params.endTime != ''"><!-- 结束时间检索 -->
-				AND access_time &lt;= to_date(#{params.endTime}, 'yyyy-mm-dd hh24:mi:ss')
+				AND login_time &lt;= to_date(#{params.endTime}, 'yyyy-mm-dd hh24:mi:ss')
 			</if>
 		</where>
 		order by info_id desc

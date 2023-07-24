@@ -8,3 +8,11 @@ export function saveProcessXml(data) {
         data: data
     })
 }
+// 根据xml部署流程
+export function deployProcessByXml(data) {
+    return request({
+        url: '/activiti/deployProcessByXml',
+        method: 'post',
+        data: data
+    })
+}
